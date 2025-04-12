@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>City Library</title>
+  <link rel="stylesheet" href="fu.css">
+  <script defer src="script.js"></script>
+  <style>
+    body {
+      background-color: #f0f8ff;
+      color: #333;
+      font-family: Arial, sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background-color: #005f73;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    .sticky-nav {
+      background-color: #0a9396;
+      padding: 10px 0;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+      color: #e0fbfc;
+    }
+
+    .button {
+      background-color: #94d2bd;
+      color: black;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 10px;
+      transition: 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #007BFF;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    section {
+      background-color: #fff;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      background-color: #ca6702;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    #collections ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    #collections ul li {
+      margin-bottom: 10px;
+    }
+
+    #collections h3 {
+      color: #007BFF;
+    }
+
+    .collection-details {
+      display: none;
+      margin-top: 10px;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-left: 5px solid #007BFF;
+    }
+
+    #search {
+      text-align: center;
+    }
+
+    #search input {
+      width: 60%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+
+    #search button {
+      padding: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Back to Top Button */
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #005f73;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: none;
+      z-index: 100;
+    }
+
+    /* Dark Mode Toggle */
+    #dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ca6702;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 100;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    .dark-mode header,
+    .dark-mode .sticky-nav,
+    .dark-mode footer {
+      background-color: #1e1e1e;
+    }
+
+    .dark-mode .button {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .dark-mode .collection-details {
+      background-color: #2b2b2b;
+      border-color: #ff9800;
+    }
+
+    /* Hero Section Animation */
+    #hero h2 {
+      animation: slideIn 1s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>City Library</h1>
+    </div>
+    <nav class="sticky-nav">
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero">
+      <h2>Welcome to the City Library</h2>
+      <p>Your gateway to knowledge and community resources.</p>
+      <a href="#collections" class="button">Explore Our Collections</a>
+    </section>
+
+    <section id="about">
+      <h2>About Us</h2>
+      <p>Our mission is to provide access to information and resources for all community members.</p>
+    </section>
+
+    <section id="services">
+      <h2>Services</h2>
+      <ul>
+        <li>Borrowing Policies</li>
+        <li>Digital Resources</li>
+        <li>Research Help</li>
+      </ul>
+    </section>
+
+    <section id="collections">
+      <h2>Our Collections</h2>
+      <p>Explore the different collections available at City Library:</p>
+
+      <button class="button" onclick="toggleCollection('books')">Books</button>
+      <div id="books" class="collection-details">
+        <p>Our extensive collection includes fiction, non-fiction, historical texts, and educational materials.</p>
+      </div>
+
+      <button class="button" onclick="toggleCollection('ebooks')">E-books</button>
+      <div id="ebooks" class="collection-details">
+        <p>Borrow digital books and read them on your favorite devices anytime, anywhere.</p>
+      </div>
+
+      <button class="button" onclick="toggleCollection('audiobooks')">Audiobooks</button>
+      <div id="audiobooks" class="collection-details">
+        <p>Listen to a variety of audiobooks, from fiction to self-improvement and educational content.</p>
+      </div>
+
+      <button class="button" onclick="toggleCollection('research')">Research Materials</button>
+      <div id="research" class="collection-details">
+        <p>Access journals, academic papers, and digital databases for research and studies.</p>
+      </div>
+
+      <button class="button" onclick="toggleCollection('special')">Special Collections</button>
+      <div id="special" class="collection-details">
+        <p>Explore rare books, historical archives, and exclusive limited editions.</p>
+      </div>
+    </section>
+
+    <section id="events">
+      <h2>Upcoming Events</h2>
+      <ul id="event-list">
+        <li>Loading events...</li>
+      </ul>
+    </section>
+
+    <section id="search">
+      <h2>Search for a Book</h2>
+      <input type="text" id="search-bar" placeholder="Enter book title...">
+      <button onclick="searchLibrary()">Search</button>
+      <p id="search-result"></p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Email: <a href="mailto:info@citylibrary.com">info@citylibrary.com</a></p>
+      <p>Phone: <a href="tel:+11234567890">(123) 456-7890</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 City Library. All rights reserved.</p>
+  </footer>
+
+  <!-- Dark mode + Back to top -->
+  <button id="dark-mode-toggle" onclick="toggleDarkMode()">🌓 Dark Mode</button>
+  <button id="back-to-top" onclick="scrollToTop()">Top</button>
+
+  <script>
+    function toggleCollection(collectionId) {
+      let section = document.getElementById(collectionId);
+      section.style.display = (section.style.display === "none" || section.style.display === "") ? "block" : "none";
+    }
+
+    function searchLibrary() {
+      let query = document.getElementById('search-bar').value.toLowerCase();
+      let resultMessage = query ? `Results for "${query}"` : "Please enter a book title to search.";
+      document.getElementById('search-result').innerText = resultMessage;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const events = [
+        { title: "Book Reading - April 10", description: "Join our author panel discussion and reading." },
+        { title: "Coding Workshop - April 15", description: "Intro to HTML & JavaScript. Bring your laptop!" },
+        { title: "Storytime for Kids - April 20", description: "A magical morning with storytelling and crafts." }
+      ];
+
+      const eventList = document.getElementById("event-list");
+      eventList.innerHTML = "";
+
+      events.forEach((event, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <strong>${event.title}</strong>
+          <button onclick="toggleEventDetail(${index})" class="button">More Info</button>
+          <p id="event-detail-${index}" style="display:none;">${event.description}</p>
+        `;
+        eventList.appendChild(li);
+      });
+    });
+
+    function toggleEventDetail(index) {
+      const detail = document.getElementById(`event-detail-${index}`);
+      detail.style.display = (detail.style.display === "none" || detail.style.display === "") ? "block" : "none";
+    }
+
+    window.onscroll = function () {
+      document.getElementById("back-to-top").style.display =
+        window.scrollY > 200 ? "block" : "none";
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
+</body>
+</html>
